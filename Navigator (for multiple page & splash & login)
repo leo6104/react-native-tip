@@ -1,63 +1,63 @@
 
+http://stackoverflow.com/questions/33196334/how-to-do-a-multi-page-app-in-react-native
+
 Navigator is the component i use to solve this.
 
 1. Define your initial Route and general properties in the render method:
-class MyApp extends React.Component {
-    render () {
-      return (
-          <Navigator
-              initialRoute={{id: 'SplashPage', name: 'Index'}}
-              renderScene={this.renderScene.bind(this)}
-              configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig;
-          }
-          return Navigator.SceneConfigs.VerticalDownSwipeJump;
-        }}/>
-      );
+    class MyApp extends React.Component {
+        render () {
+          return (
+              <Navigator
+                  initialRoute={{id: 'SplashPage', name: 'Index'}}
+                  renderScene={this.renderScene.bind(this)}
+                  configureScene={(route) => {
+              if (route.sceneConfig) {
+                return route.sceneConfig;
+              }
+              return Navigator.SceneConfigs.VerticalDownSwipeJump;
+            }}/>
+          );
+        }
     }
-}
-
 
 2. And then you need to define the other sites/views/pages where you want to go to in the renderScene method:
 
-renderScene ( route, navigator ) {
-    var routeId = route.id;
-    if (routeId === 'SplashPage') {
-        return (
-            <SplashPage
-                navigator={navigator}/>
-        );
+    renderScene ( route, navigator ) {
+        var routeId = route.id;
+        if (routeId === 'SplashPage') {
+            return (
+                <SplashPage
+                    navigator={navigator}/>
+            );
+        }
+        if (routeId === 'LoginPage') {
+            return (
+                <LoginPage
+                    navigator={navigator}/>
+            );
+        }
     }
-    if (routeId === 'LoginPage') {
-        return (
-            <LoginPage
-                navigator={navigator}/>
-        );
-    }
-}
-}
 
 
 3. In the Splash Class you see how you route to the next page as soon as in this example 2 seconds are over with following code: (i think it would be better if there would be something like replaceWith and not just replace but never mind :P)
 
-class SplashPage extends Component {
-  componentWillMount () {
-      var navigator = this.props.navigator;
-      setTimeout (() => {
-          navigator.replace({
-              id: 'LoginPage',
-          });
-      }, 2000);
-  }
-  
-  render () {
-      return (
-          <View style={{flex: 1, backgroundColor: 'red' alignItems: 'center', justifyContent: 'center'}}>
-              <Image style={{position: 'absolute', left: 0, top: 0, width: windowSize.width, height: windowSize.height}} source={require('image!splash_screen')}></Image>
-          </View>
-      );
-  }
-}
+    class SplashPage extends Component {
+      componentWillMount () {
+          var navigator = this.props.navigator;
+          setTimeout (() => {
+              navigator.replace({
+                  id: 'LoginPage',
+              });
+          }, 2000);
+      }
+      
+      render () {
+          return (
+              <View style={{flex: 1, backgroundColor: 'red' alignItems: 'center', justifyContent: 'center'}}>
+                  <Image style={{position: 'absolute', left: 0, top: 0, width: windowSize.width, height: windowSize.height}} source={require('image!splash_screen')}></Image>
+              </View>
+          );
+      }
+    }
 
 module.exports = SplashPage;
