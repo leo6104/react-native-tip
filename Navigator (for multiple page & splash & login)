@@ -3,7 +3,7 @@ http://stackoverflow.com/questions/33196334/how-to-do-a-multi-page-app-in-react-
 
 Navigator is the component i use to solve this.
 
-1. Define your initial Route and general properties in the render method:
+### 1. Define your initial Route and general properties in the render method:
     class MyApp extends React.Component {
         render () {
           return (
@@ -20,7 +20,7 @@ Navigator is the component i use to solve this.
         }
     }
 
-2. And then you need to define the other sites/views/pages where you want to go to in the renderScene method:
+### 2. And then you need to define the other sites/views/pages where you want to go to in the renderScene method:
 
     renderScene ( route, navigator ) {
         var routeId = route.id;
@@ -39,7 +39,7 @@ Navigator is the component i use to solve this.
     }
 
 
-3. In the Splash Class you see how you route to the next page as soon as in this example 2 seconds are over with following code: (i think it would be better if there would be something like replaceWith and not just replace but never mind :P)
+### 3. In the Splash Class you see how you route to the next page as soon as in this example 2 seconds are over with following code: (i think it would be better if there would be something like replaceWith and not just replace but never mind :P)
 
     class SplashPage extends Component {
       componentWillMount () {
